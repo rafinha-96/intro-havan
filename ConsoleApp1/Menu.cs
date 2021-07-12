@@ -129,6 +129,6 @@ namespace ConsoleApp1
             Console.ResetColor();
             Console.ReadLine();
             Console.Clear();
-        }
+        } 
     }
 }
