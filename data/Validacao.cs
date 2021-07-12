@@ -76,8 +76,8 @@ namespace Data
                 }
                 catch (FormatException)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine("dado invalido! tente novamente!");
-                    Console.ResetColor();
+                    
+                    Console.WriteLine("dado invalido! tente novamente!");
                 }
             }
             return id;

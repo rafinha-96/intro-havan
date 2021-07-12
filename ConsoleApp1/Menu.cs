@@ -9,7 +9,7 @@ namespace ConsoleApp1
 {
     class Menu
     {
-        List<usuario> usuarios = new List<usuario>();
+        List<Usuario> usuarios = new List<Usuario>();
 
         public void montamenu()
         {
@@ -17,28 +17,8 @@ namespace ConsoleApp1
             opcoes();
             rodape();          
             escolha();
-            Console.ReadLine();
         }
 
-        public void mostrarusuarios(List<usuario> usuarios)
-        {
-            if(usuarios.Count<= 0 )
-            {
-                Console.WriteLine("\nnenhum usuario cadastrado!");           
-            }
-            else
-            {
-                foreach (var item in usuarios)
-                {
-                    Console.WriteLine($"usuario -\nnome completo: {item.nome}{ item.sobre}\nidade: { item.id}\nemail: { item.email}\ncidade: { item.cid}\nrua: { item.rua} , numero: { item.num}");
-                }
-            }
-            Console.ForegroundColor = ConsoleColor.Green; Console.WriteLine("\npress enter para voltar ao menu: ");
-            Console.ResetColor();
-            Console.ReadLine();
-            Console.Clear();
-            montamenu();
-        }
         private void cabecalho()
         {
             Console.WriteLine("*********************  bem vindo  *************************");
@@ -79,11 +59,33 @@ namespace ConsoleApp1
                         string resposta = "";
                         do
                         {
-                            usuario user = new usuario();
-                            user.cadastro();
+                            Console.Write("digite seu primeiro nome: ");
+                            string nome = Validacao.validastring(true); Console.Clear();
+
+                            Console.Write("digite seu sobrenome: ");
+                            string sobre = Validacao.validastring(true); Console.Clear();
+
+                            Console.Write("digite sua idade: ");
+                            int id = Validacao.validanumero(); Console.Clear();
+
+                            Console.Write("digite seu email: ");
+                            string email = Validacao.validaemail(); Console.Clear();
+
+                            Console.Write("cidade: ");
+                            string cid = Validacao.validastring(); Console.Clear();
+
+                            Console.WriteLine("digite o nome da sua Rua: ");
+                            string rua = Validacao.validastring(); Console.Clear();
+
+                            Console.WriteLine("digite o numero da sua casa: ");
+                            int num = Validacao.validanumero(); Console.Clear();
+                            //cria variavel com dados
+                            Usuario user = new Usuario(nome, sobre, id, email, cid, rua, num);
+                            //guarda os dados na variavel
+                            usuarios.Add(user);
+
                             Console.WriteLine("deseja cadatrar mais um usuario? s/n");
                             resposta = Console.ReadLine();
-                            usuarios.Add(user);
                         }
                         while (resposta=="s");                                           
                         Console.Clear();
@@ -97,19 +99,36 @@ namespace ConsoleApp1
                         montamenu();
                         break;
                     case 3:
-                        mostrarusuarios(usuarios);
-                        Console.WriteLine("press enter para sair para o menu! ");
-                        Console.ReadLine();
+                        Console.Clear();
+                        mostrarusuarios(usuarios);                                    
                         Console.Clear();
                         montamenu();
                         break;
                     default:
-                        Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine("opção inválida");
-                        Console.ResetColor();
+                        Console.WriteLine("opção inválida");  
                         break;
                 }
             }
             while (opcao < 0 || opcao > 3);
+        }
+
+        public void mostrarusuarios(List<Usuario> usuarios)
+        {
+            if(usuarios.Count<= 0 )
+            {
+                Console.WriteLine("\nnenhum usuario cadastrado!");           
+            }
+            else
+            {
+                foreach (var item in usuarios)
+                {
+                    Console.WriteLine($"usuario -\nnome completo: {item.Nome}{ item.SobreNome}\nidade: { item.Idade}\nemail: { item.Email}\ncidade: { item.Cidade}\nrua: { item.Rua} , numero: { item.Numero}");
+                }
+            }
+            Console.ForegroundColor = ConsoleColor.Green; Console.WriteLine("\npress enter para voltar ao menu: ");
+            Console.ResetColor();
+            Console.ReadLine();
+            Console.Clear();
         }
     }
 }
