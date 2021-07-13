@@ -9,7 +9,7 @@ namespace ConsoleApp1
 {
     class Menu
     {
-        List<Usuario> usuarios = new List<Usuario>();
+        
 
         public void montamenu()
         {
@@ -31,7 +31,6 @@ namespace ConsoleApp1
             Console.WriteLine("opções: ");
             Console.WriteLine("1 - cadastro usuário");
             Console.WriteLine("2 - cadastro produto");
-            Console.WriteLine("3 - mostrar usuarios");
             Console.WriteLine("0 - sair");
         }
 
@@ -54,40 +53,8 @@ namespace ConsoleApp1
                         Console.WriteLine("thau");
                         break;
                     case 1:
-                        
-                        Console.Clear();
-                        string resposta = "";
-                        do
-                        {
-                            Console.Write("digite seu primeiro nome: ");
-                            string nome = Validacao.validastring(true); Console.Clear();
-
-                            Console.Write("digite seu sobrenome: ");
-                            string sobre = Validacao.validastring(true); Console.Clear();
-
-                            Console.Write("digite sua idade: ");
-                            int id = Validacao.validanumero(); Console.Clear();
-
-                            Console.Write("digite seu email: ");
-                            string email = Validacao.validaemail(); Console.Clear();
-
-                            Console.Write("cidade: ");
-                            string cid = Validacao.validastring(); Console.Clear();
-
-                            Console.WriteLine("digite o nome da sua Rua: ");
-                            string rua = Validacao.validastring(); Console.Clear();
-
-                            Console.WriteLine("digite o numero da sua casa: ");
-                            int num = Validacao.validanumero(); Console.Clear();
-                            //cria variavel com dados
-                            Usuario user = new Usuario(nome, sobre, id, email, cid, rua, num);
-                            //guarda os dados na variavel
-                            usuarios.Add(user);
-
-                            Console.WriteLine("deseja cadatrar mais um usuario? s/n");
-                            resposta = Console.ReadLine();
-                        }
-                        while (resposta=="s");                                           
+                        ModuloUsuario moduloUsuario = new ModuloUsuario();
+                        moduloUsuario.Create();
                         Console.Clear();
                         montamenu();
                         break;
@@ -98,18 +65,13 @@ namespace ConsoleApp1
                         Console.ReadLine();Console.Clear();                       
                         montamenu();
                         break;
-                    case 3:
-                        Console.Clear();
-                        mostrarusuarios(usuarios);                                    
-                        Console.Clear();
-                        montamenu();
-                        break;
+                    
                     default:
                         Console.WriteLine("opção inválida");  
                         break;
                 }
             }
-            while (opcao < 0 || opcao > 3);
+            while (opcao < 0 || opcao > 2);
         }
 
         public void mostrarusuarios(List<Usuario> usuarios)
